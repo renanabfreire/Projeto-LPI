@@ -2,14 +2,16 @@
 #define PROJECT_H
 #include <string>
 #include "Author.h"
+#include "Assessment.h"
+#include <vector>
 
 // Class of Projects or Lab Report
 class Project
 {
     public:
     std::string name;
-    Author author;
-    float rating;
+    Author author[10];
+    std::vector <Assessment> assessments;
     std::string lab;
     std::string resume;
     std::string addresspdf;

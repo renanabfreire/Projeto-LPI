@@ -6,11 +6,12 @@
 class Author
 {
     public:
-    std::string name;
-    std::string department;
-    bool role;
-    std::string institution;
-    std::string id;
+
+        std::string name;
+        std::string course_department;
+        int role;
+        std::string institution;
+        int id;
 
     Author();
 };
