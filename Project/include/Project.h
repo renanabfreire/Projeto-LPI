@@ -17,6 +17,7 @@ class Project
     std::string addresspdf;
 
     Project();
+    Project(std::string name, Author author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf);
     float giveRating();
     std::string editName();
     std::string editAuhtor();
