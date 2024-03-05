@@ -1,23 +1,28 @@
-#ifndef LOGIN_H
-#define LOGIN_H
+#pragma once
 #include <string>
 
 class Login
 {
-    public:
+    private:
     
         std::string user;
         std::string password;
         int author_id;
     
-    Login();
     Login(std::string user, std::string password, int author_id);
-
+    public:
     // Funções de edicao do login
-    bool editUser(std::string user);
-    bool editPassword(std::string password);
-    bool editId(int author_id);
+    void editUser(std::string user);
+    void editPassword(std::string password);
+    void editId(int author_id);
+
+    // Metodos que retornam as variaveis de login 
+    std:: string getpassword();
+    std:: string getuser();
+    int getautor_id();
+
+
 
 };
 
-#endif // LOGIN_H
+
