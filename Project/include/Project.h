@@ -9,7 +9,7 @@
 class Project
 {
     private:
-    std::string name;
+    std::string title;
     std::vector <Author> author;
     std::vector <Assessment> assessments;
     std::string lab;
@@ -18,16 +18,18 @@ class Project
 
     public:
     Project();
-    Project(std::string name, std::vector <Author> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf);
-    bool editName(std::string name);
-    bool addAuhtor(Author autor);
+    Project(std::string title, std::vector <Author> author, std::string lab, std::string resume, std::string addresspdf);
+    Project(std::string title, std::vector <Author> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf);
+    ~Project();
+    bool editTitle(std::string title);
+    bool addAuhtor(Author author);
     bool addAssessment(Assessment assessment);
     bool setLab(std::string laboratorio);
     bool setResume(std::string resume);
     bool setAdresspdf(std::string address);
-    std::string getName();
+    std::string getTitle();
     std::string getAuthors();
-    std::string getAssesments();
+    float getAssesments();
     std::string getLab();
     std::string getResume();
 };

@@ -4,9 +4,9 @@ Project::Project()
 {
 }
 
-Project::Project(std::string name, std::vector <Author> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf)
+Project::Project(std::string title, std::vector <Author> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf)
 {
-    this->name = name;
+    this->title = title;
     this->author = author;
     this->assessments = assessments;
     this->lab = lab;
@@ -14,11 +14,21 @@ Project::Project(std::string name, std::vector <Author> author, std::vector <Ass
     this->addresspdf = addresspdf;
 }
 
-bool Project::editName(std::string name)
+Project::Project(std::string title, std::vector <Author> author, std::string lab, std::string resume, std::string addresspdf)
+{
+    this->title = title;
+    this->author = author;
+    this->lab = lab;
+    this->resume = resume;
+    this->addresspdf = addresspdf;
+}
+
+
+bool Project::editTitle(std::string title)
 {
     try
     {
-        this->name = name;
+        this->title = title;
         return true;
     }
     catch (const std::exception &e)
@@ -99,9 +109,9 @@ bool Project::setAdresspdf(std::string address)
     }
 }
 
-std::string Project::getName()
+std::string Project::getTitle()
 {
-    return name;
+    return title;
 }
 
 
@@ -123,10 +133,15 @@ std::string Project::getAuthors()
 }
 
 
-/*std::vector Project::getAssesments()
+float Project::getAssesments()
 {
-    return assessments;
-}*/
+    float media = 0;
+    for(int i=0; i<assessments.size();i++)
+    {
+        media += assessments[i].rating;
+    }
+    return media/assessments.size();
+}
 
 
 std::string Project::getLab()

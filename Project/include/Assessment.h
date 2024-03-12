@@ -10,15 +10,13 @@ class Assessment
     public:
         Author avaliador;
         int rating;
-        std:: string comment;
 
     Assessment();
-    Assessment(Author avaliador, int rating, std::string comment);
+    Assessment(Author avaliador, int rating);
 
     // Funcoes para edição das avaliações
     bool editAuhtor(Author avaliador);
     bool editRating(int rating);
-    bool editComment(std::string comment);
 
 };
 
