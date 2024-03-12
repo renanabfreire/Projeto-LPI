@@ -8,19 +8,28 @@
 // Class of Projects or Lab Report
 class Project
 {
-    public:
+    private:
     std::string name;
-    Author author[10];
+    std::vector <Author> author;
     std::vector <Assessment> assessments;
     std::string lab;
     std::string resume;
     std::string addresspdf;
 
+    public:
     Project();
-    Project(std::string name, Author author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf);
-    float giveRating();
-    std::string editName();
-    std::string editAuhtor();
+    Project(std::string name, std::vector <Author> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf);
+    bool editName(std::string name);
+    bool addAuhtor(Author autor);
+    bool addAssessment(Assessment assessment);
+    bool setLab(std::string laboratorio);
+    bool setResume(std::string resume);
+    bool setAdresspdf(std::string address);
+    std::string getName();
+    std::string getAuthors();
+    std::string getAssesments();
+    std::string getLab();
+    std::string getResume();
 };
 
 #endif // PROJECT_H
