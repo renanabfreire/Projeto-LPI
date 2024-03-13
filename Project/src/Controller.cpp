@@ -103,7 +103,7 @@ void Controller::excluirProjeto(string title)
 }
 
 // Editar um projeto
-bool Controller::editarProjeto(int id_projeto)
+bool Controller::editarProjeto(string title)
 {
     int o = 0;
 
@@ -119,13 +119,15 @@ bool Controller::editarProjeto(int id_projeto)
         return false;
     }
 
+    int id_projeto = indiceProjeto(title);
+
     if(o == 0)
     {
         cout << "Função cancelada!" << endl;
         return false;
     }else if(o == 1)
     {
-        string nome, instituição, comentario;
+        string nome, instituicao, comentario;
         int role, rating;
 
         cout << "Digite as informações do autor do comentário:" << endl;
@@ -135,9 +137,9 @@ bool Controller::editarProjeto(int id_projeto)
         cin >> role;
         cin.ignore();
         cout << "Instituição: ";
-        getline(cin, instituição);
+        getline(cin, instituicao);
 
-        Author autor_comentario = Author(nome, role, instituição);
+        Author autor_comentario = Author(nome, role, instituicao);
 
         cout << "\nAdicione valor da avaliação [ de 1 a 5 ]: ";
         cin >> rating;
@@ -206,18 +208,136 @@ bool Controller::editarProjeto(int id_projeto)
 }
 
 // Gerar relatório
-void Controller::gerarRelatorio()
+bool Controller::gerarRelatorio()
 {
+    int cont=0;
+    float mediaDasAvaliacoes=0, maiorAvaliacao=0;
+    string nomeMaior;
+
+    // Gerando arquivo
+    fstream relatorio;
+
+    relatorio.open("../data/Relatório.csv", ios::out);
+    if(!relatorio.is_open())
+    {
+        cout << "Erro: Não foi possível abrir arquivo :/" << endl;
+        return false;
+    }
+
+    // primeira linha
+    relatorio << "Arquivos:;Avaliações\n";
+
+    // seguintes linhas:
+    for(int i=0; i<projects.size(); i++)
+    {
+        relatorio << projects[i].getTitle() << ";" << projects[i].getAssesments() << "\n";
+
+        mediaDasAvaliacoes += projects[i].getAssesments(); // adiciona avaliação de cada projeto à média
+        //salvando informações do mais bem avaliado
+        if(projects[i].getAssesments() > maiorAvaliacao)
+        {
+            maiorAvaliacao = projects[i].getAssesments();
+        }
+    }
+
+    mediaDasAvaliacoes /= projects.size();
+
+    //fim do relatório:
+    relatorio << "Avaliação média:;" << mediaDasAvaliacoes;
+    relatorio << "Mais bem avaliado:;";
+    for (int i = 0; i < projects.size(); i++)
+    {
+        if(projects[i].getAssesments() == maiorAvaliacao)
+        {
+            if(cont == 0)
+            {
+                relatorio << projects[i].getTitle() << ";" << projects[i].getAssesments() << "\n";
+                cont+=1;
+            }
+            else
+            {
+                relatorio << ";" << projects[i].getTitle() << ";" << projects[i].getAssesments() << "\n";
+            }
+        }
+    }
 }
 
 // Salvar no arquivo
 bool Controller::salvar()
 {
+    // Create an output filestream object
+    ofstream arq_projects("../data/projects.csv");
+    
+    // Send the column name to the stream
+    arq_projects << "title; author; assessments; lab; resume; addresspdf" << "\n";
+    
+    // Send data to the stream
+    for(int i = 0; i < projects.size(); ++i)
+    {
+        arq_projects << projects[i].getTitle() << "; [" << projects[i].getAuthors() << "]; [" << projects[i].getAssesments() << "]; " << projects[i].getLab() << "; " << projects[i].getResume() << "; " << projects[i].getAdress();
+        
+    }
+    
+    // Close the file
+    arq_projects.close();
 }
 
 // Upload do arquivo
 bool Controller::carregar()
 {
+    // Create an input filestream
+    ifstream arq_projects("../data/projects.csv");
+
+    // Make sure the file is open
+    if(!arq_projects.is_open()) throw std::runtime_error("Arquivo projeto inativo!");
+
+    // Helper vars
+    string line;
+
+    // Read the column names
+    if(arq_projects.good())
+    {
+        // Extract the first line in the file
+        getline(arq_projects, line);
+    }
+
+    // Read data, line by line
+    while(getline(arq_projects, line))
+    {
+        string intermediario;
+        stringstream informacoes(line);
+
+        // Recebendo titulo
+        getline(informacoes, intermediario, ';');
+        string titulo = intermediario;
+
+        // Recebendo autores
+        getline(informacoes, intermediario, ';');
+        
+        vector <Author> autors_vector;
+        string autor;
+        stringstream autores(intermediario);
+
+        while(getline(autores, autor, ','))
+        {
+            stringstream atributos(autor);
+            
+            string nome;
+            getline(atributos, nome, '-');
+
+            string area;
+            getline(atributos, area, '-');
+
+            string instituicao;
+            getline(atributos, instituicao, '-');
+            autors_vector.push_back(Author(nome, area, instituicao));
+        }
+
+
+    }
+
+    // Close file
+    arq_projects.close();
 }
 
 // Listar todos

@@ -13,7 +13,7 @@ class Project
     std::vector <Author> author;
     std::vector <Assessment> assessments;
     std::string lab;
-    std::string resume;
+    std::string resume; 
     std::string addresspdf;
 
     public:
@@ -30,8 +30,11 @@ class Project
     std::string getTitle();
     std::string getAuthors();
     float getAssesments();
+    std::string getAssesmentsComplete();
     std::string getLab();
     std::string getResume();
+    std::string getAdress();
+    std::string getAuthorsComplete();
 };
 
 #endif // PROJECT_H

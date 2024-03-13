@@ -143,6 +143,22 @@ float Project::getAssesments()
     return media/assessments.size();
 }
 
+std::string Project::getAssessmentsComplete(){
+
+    std::string out= "";
+
+    for(int i=0; i<assessments.size(); i++)
+    {
+        out += assessments[i].();
+        out += "-";
+        out += author[i].getArea();
+        out += "-";
+        out += author[i].getInstitution();
+    }
+
+    return out;
+}
+
 
 std::string Project::getLab()
 {
@@ -153,4 +169,25 @@ std::string Project::getLab()
 std::string Project::getResume()
 {
     return resume;
+}
+
+std::string Project::getAdress()
+{
+    return addresspdf;
+}
+
+std::string Project::getAuthorsComplete(){
+
+    std::string out= "";
+
+    for(int i=0; i<author.size(); i++)
+    {
+        out += author[i].getName();
+        out += "-";
+        out += author[i].getArea();
+        out += "-";
+        out += author[i].getInstitution();
+    }
+
+    return out; 
 }

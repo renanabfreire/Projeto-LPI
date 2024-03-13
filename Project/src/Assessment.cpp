@@ -12,6 +12,7 @@ Assessment::Assessment(Author avaliador, int rating){
     
     this->avaliador = avaliador;
     this->rating = rating;
+
 }
 
 bool Assessment::editAuhtor(Author avaliador)

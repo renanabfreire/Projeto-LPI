@@ -8,7 +8,7 @@
 class Assessment
 {
     public:
-        Author avaliador;
+        Author *avaliador;
         int rating;
 
     Assessment();
@@ -17,7 +17,6 @@ class Assessment
     // Funcoes para edição das avaliações
     bool editAuhtor(Author avaliador);
     bool editRating(int rating);
-
 };
 
 #endif // ASSESSMENT_H

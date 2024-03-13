@@ -3,6 +3,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <utility> // std::pair
+#include <stdexcept> // std::runtime_error
+#include <sstream> // std::stringstream
 #include "Assessment.h"
 #include "Author.h"
 #include "Login.h"
@@ -35,7 +39,7 @@ class Controller{
         bool editarProjeto(int id_projeto);
 
         // Gerar relatório
-        void gerarRelatorio();
+        bool gerarRelatorio();
 
         // Salvar no arquivo
         bool salvar();
