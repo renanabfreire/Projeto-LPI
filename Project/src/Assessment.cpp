@@ -2,6 +2,7 @@
 
 Assessment::Assessment()
 {
+    rating = 0;
 }
 
 Assessment::Assessment(Author *avaliador, int rating){

@@ -1,4 +1,4 @@
-#include "Controller.h"
+#include "../include/Controller.h"
 #include <iostream>
 #include <unistd.h>
 #include <string>
@@ -34,16 +34,20 @@ int main(){
                 mensagemDeClose();
                 break;
             }
+            break;
         }
         else if(opc == 2)
         {
             string titulo, lab, resume, addresspdf;
-            cout << "\n\n Título: "
+            cout << "\n\n Título: ";
             getline(cin, titulo);
-            cout << "Laboratório: "
+            cout << "Laboratório: ";
             getline(cin, lab);
-            cout << "resume: ";
-            crud.adicionarProjeto();
+            cout << "Resumo/Abstract:\n";
+            getline(cin, resume);
+            cout << "Endereço do PDF: ";
+            getline(cin, addresspdf);
+            crud.adicionarProjeto(titulo, lab, resume, addresspdf);
         }
     }    
     
@@ -52,17 +56,20 @@ int main(){
 
 int interface()
 {
-    int o;
-    do
+    int o=0;
+    while(o<1 || o>5)
     {
         cout << "\n\n   + O que deseja fazer?" << endl;
         cout << "     [ 1 ] Gerar Relatório,\n     [ 2 ] Adicionar Projeto\n     [ 3 ] Avaliar/Editar Projeto\n     [ 4 ] Pesquisar Projeto\n     [ 5 ] !! Excluir Projeto !!\n" << endl;
-        cout << "Digite a sua poção: ";
+        cout << "Digite a sua opoção: ";
         cin >> o;
 
         if(o<1 || o>5)
+        {
+            cout << "Operação não identificada, por favor, repita sua escolha..." << endl;
+        }
 
-    }while(o<1 || o>5)
+    }
 }
 
 void carregamento()

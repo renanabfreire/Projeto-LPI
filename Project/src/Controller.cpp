@@ -37,11 +37,11 @@ void Controller::adicionarProjeto(
         int escolha = 1;
         vector<Author *> autores;
 
-        while (escolha = !0)
+        while (escolha == 1)
         {
 
             string name;
-            char role;
+            int role;
             string institution;
 
             cout << "Adicione o nome do autor " << cont + 1 << ": ";
@@ -59,6 +59,7 @@ void Controller::adicionarProjeto(
                 string course;
                 cout << "Digite o curso: ";
                 cin >> course;
+                cin.ignore();
                 autores.push_back(new Student(name, institution, course));
             }
             else if (role == 2)
@@ -66,6 +67,7 @@ void Controller::adicionarProjeto(
                 string departament;
                 cout << "Digite o departamento: ";
                 cin >> departament;
+                cin.ignore();
                 autores.push_back(new Teacher(name, institution, departament));
             }
 
@@ -73,6 +75,7 @@ void Controller::adicionarProjeto(
 
             cout << "Deseja cadastrar um novo autor? (1-SIM/0-NAO)";
             cin >> escolha;
+            cin.ignore();
             cont++;
         }
 
@@ -85,7 +88,7 @@ void Controller::adicionarProjeto(
 }
 
 // Pesquisar por um projeto
-int Controller::pesquisarProjeto(std::string title)
+void Controller::pesquisarProjeto(std::string title)
 {
     int tam = projects.size();
     for (int i = 0; i < tam; i++)
@@ -309,13 +312,15 @@ bool Controller::gerarRelatorio()
             }
         }
     }
+
+    return true;
 }
 
 // Salvar no arquivo
 bool Controller::salvar()
 {
     // Create an output filestream object
-    ofstream arq_projects("../data/projects.csv");
+    ofstream arq_projects("../data/projects.csv", ios_base::out);
 
     // Send the column name to the stream
     arq_projects << "title; author; assessments; lab; resume; addresspdf"
@@ -324,7 +329,7 @@ bool Controller::salvar()
     // Send data to the stream
     for (int i = 0; i < projects.size(); ++i)
     {
-        arq_projects << projects[i].getTitle() << ";" << projects[i].getAuthorsComplete() << ";" << projects[i].getAssessmentsComplete() << ";" << projects[i].getLab() << ";" << projects[i].getResume() << ";" << projects[i].getAdress();
+        arq_projects << projects[i].getTitle() << ";" << projects[i].getAuthorsComplete() << ";" << projects[i].getAssessmentsComplete() << ";" << projects[i].getLab() << ";" << projects[i].getResume() << ";" << projects[i].getAdress() << "\n";
     }
 
     // Close the file
@@ -335,7 +340,7 @@ bool Controller::salvar()
 bool Controller::carregar()
 {
     // Create an input filestream
-    ifstream arq_projects("../data/projects.csv");
+    ifstream arq_projects("../data/projects.csv", ios_base::in);
 
     // Make sure the file is open
     if (!arq_projects.is_open())

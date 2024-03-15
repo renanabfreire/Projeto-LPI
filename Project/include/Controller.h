@@ -29,7 +29,7 @@ class Controller{
         );
 
         // Pesquisar por um projeto
-        int pesquisarProjeto(std::string titulo);
+        void pesquisarProjeto(std::string titulo);
 
         // Validar existencia do projeto
         int indiceProjeto(std::string title);
