@@ -1,4 +1,4 @@
-#include "Student.h"
+#include "../include/Student.h"
 
 Student:: Student(std::string name, std::string instituition, std::string course):Author(name, 1, instituition){
     this-> course= course;

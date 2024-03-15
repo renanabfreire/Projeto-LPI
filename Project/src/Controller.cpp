@@ -19,7 +19,8 @@ int Controller::indiceProjeto(string title)
         {
             return i;
         };
-    }    return -1;
+    }
+    return -1;
 }
 
 void Controller::adicionarProjeto(
@@ -29,44 +30,56 @@ void Controller::adicionarProjeto(
     string addresspdf)
 {
 
-    if (indiceProjeto(title) == -1){
+    if (indiceProjeto(title) == -1)
+    {
 
         int cont = 0;
-        char escolha;
-        vector<Author> autores;
+        int escolha = 1;
+        vector<Author *> autores;
 
-        while (true)
+        while (escolha = !0)
         {
 
             string name;
-            int role;
+            char role;
             string institution;
 
-            cout << "Adicione o nome do autor " << cont + 1 << endl;
-            cin.ignore();
-
+            cout << "Adicione o nome do autor " << cont + 1 << ": ";
             getline(cin, name);
 
+            cout << "Qual cargo ele ocupa? ";
             cin >> role;
             cin.ignore();
 
+            cout << "Qual a instituicao? ";
             getline(cin, institution);
 
-            autores.push_back(Author(name, role, institution));
-
-            cout << name << " adicionado com sucesso!";
-
-            cout << "Deseja cadastrar um novo autor? (S/N)";
-            cin >> escolha;
-
-            if (escolha == 'N' || escolha == 'n')
+            if (role == 1)
             {
-                break;
+                string course;
+                cout << "Digite o curso: ";
+                cin >> course;
+                autores.push_back(new Student(name, institution, course));
             }
+            else if (role == 2)
+            {
+                string departament;
+                cout << "Digite o departamento: ";
+                cin >> departament;
+                autores.push_back(new Teacher(name, institution, departament));
+            }
+
+            cout << name << " adicionado com sucesso!" << endl;
+
+            cout << "Deseja cadastrar um novo autor? (1-SIM/0-NAO)";
+            cin >> escolha;
+            cont++;
         }
 
         this->projects.push_back(Project(title, autores, lab, resume, addresspdf));
-    }else{
+    }
+    else
+    {
         cout << "Um projeto com esse título já existe!";
     }
 }
@@ -77,14 +90,15 @@ int Controller::pesquisarProjeto(std::string title)
     int tam = projects.size();
     for (int i = 0; i < tam; i++)
     {
-        if(projects[i].getTitle().find(title) != string::npos){
-            
+        if (projects[i].getTitle().find(title) != string::npos)
+        {
+
             cout << "Autor: " << projects[i].getAuthors() << endl;
             cout << "Titulo: " << projects[i].getTitle() << endl;
             cout << "Média das avaliações: " << projects[i].getAssesments() << endl;
             cout << "Laboratório de desenvolvimento: " << projects[i].getLab() << endl;
-            cout << "Resumo: \n" << projects[i].getResume() << endl;
-            
+            cout << "Resumo: \n"
+                 << projects[i].getResume() << endl;
         }
     }
 }
@@ -93,11 +107,14 @@ int Controller::pesquisarProjeto(std::string title)
 void Controller::excluirProjeto(string title)
 {
     int i = indiceProjeto(title);
-    
-    if (indiceProjeto(title) == -1){
+
+    if (indiceProjeto(title) == -1)
+    {
         cout << "Esse projeto não existe";
-    }else{
-        this->projects.erase(projects.begin()+i);
+    }
+    else
+    {
+        this->projects.erase(projects.begin() + i);
         cout << title << " excluido com sucesso!" << endl;
     }
 }
@@ -121,11 +138,12 @@ bool Controller::editarProjeto(string title)
 
     int id_projeto = indiceProjeto(title);
 
-    if(o == 0)
+    if (o == 0)
     {
         cout << "Função cancelada!" << endl;
         return false;
-    }else if(o == 1)
+    }
+    else if (o == 1)
     {
         string nome, instituicao, comentario;
         int role, rating;
@@ -139,7 +157,20 @@ bool Controller::editarProjeto(string title)
         cout << "Instituição: ";
         getline(cin, instituicao);
 
-        Author autor_comentario = Author(nome, role, instituicao);
+        Author *autor_comentario;
+
+        if (role == 1)
+        {
+            string course;
+            cin >> course;
+            autor_comentario = new Student(nome, instituicao, course);
+        }
+        else if (role == 2)
+        {
+            string departament;
+            cin >> departament;
+            autor_comentario = new Teacher(nome, instituicao, departament);
+        }
 
         cout << "\nAdicione valor da avaliação [ de 1 a 5 ]: ";
         cin >> rating;
@@ -148,26 +179,28 @@ bool Controller::editarProjeto(string title)
             cout << "Avaliação inválida, digite um valor válido." << endl;
             cin >> rating;
         }
-        
+
         Assessment avaliacao = Assessment(autor_comentario, rating);
 
         projects[id_projeto].addAssessment(avaliacao);
 
         return true;
-    }else if(o == 2)
+    }
+    else if (o == 2)
     {
         string novo_titulo;
-        
+
         cout << "Novo título: ";
         getline(cin, novo_titulo);
 
         projects[id_projeto].editTitle(novo_titulo);
         return true;
-    }else if(o == 3)
+    }
+    else if (o == 3)
     {
-        string nome, instituição;
+        string nome, instituicao;
         int role;
-        
+
         cout << "Digite as informações do novo autor:" << endl;
         cout << "Nome: ";
         getline(cin, nome);
@@ -175,23 +208,38 @@ bool Controller::editarProjeto(string title)
         cin >> role;
         cin.ignore();
         cout << "Instituição: ";
-        getline(cin, instituição);
+        getline(cin, instituicao);
 
-        Author novo_autor = Author(nome, role, instituição);
+        Author *novo_autor;
+        if (role == 1)
+        {
+            string course;
+            cin >> course;
+            novo_autor = new Student(nome, instituicao, course);
+        }
+        else if (role == 2)
+        {
+            string departament;
+            cin >> departament;
+            novo_autor = new Teacher(nome, instituicao, departament);
+        }
+
         projects[id_projeto].addAuhtor(novo_autor);
 
         return true;
-    }else if(o == 4)
+    }
+    else if (o == 4)
     {
         string resumo;
-        
+
         cout << "Digite novo resumo:" << endl;
         getline(cin, resumo);
 
         projects[id_projeto].setResume(resumo);
 
         return true;
-    }else if(o == 5)
+    }
+    else if (o == 5)
     {
         string endereco;
 
@@ -200,7 +248,8 @@ bool Controller::editarProjeto(string title)
 
         projects[id_projeto].setAdresspdf(endereco);
         return true;
-    }else
+    }
+    else
     {
         cout << "Não foi possível selecionar sua opção" << endl;
         return false;
@@ -210,15 +259,15 @@ bool Controller::editarProjeto(string title)
 // Gerar relatório
 bool Controller::gerarRelatorio()
 {
-    int cont=0;
-    float mediaDasAvaliacoes=0, maiorAvaliacao=0;
+    int cont = 0;
+    float mediaDasAvaliacoes = 0, maiorAvaliacao = 0;
     string nomeMaior;
 
     // Gerando arquivo
     fstream relatorio;
 
     relatorio.open("../data/Relatório.csv", ios::out);
-    if(!relatorio.is_open())
+    if (!relatorio.is_open())
     {
         cout << "Erro: Não foi possível abrir arquivo :/" << endl;
         return false;
@@ -228,13 +277,13 @@ bool Controller::gerarRelatorio()
     relatorio << "Arquivos:;Avaliações\n";
 
     // seguintes linhas:
-    for(int i=0; i<projects.size(); i++)
+    for (int i = 0; i < projects.size(); i++)
     {
         relatorio << projects[i].getTitle() << ";" << projects[i].getAssesments() << "\n";
 
         mediaDasAvaliacoes += projects[i].getAssesments(); // adiciona avaliação de cada projeto à média
-        //salvando informações do mais bem avaliado
-        if(projects[i].getAssesments() > maiorAvaliacao)
+        // salvando informações do mais bem avaliado
+        if (projects[i].getAssesments() > maiorAvaliacao)
         {
             maiorAvaliacao = projects[i].getAssesments();
         }
@@ -242,17 +291,17 @@ bool Controller::gerarRelatorio()
 
     mediaDasAvaliacoes /= projects.size();
 
-    //fim do relatório:
+    // fim do relatório:
     relatorio << "Avaliação média:;" << mediaDasAvaliacoes;
     relatorio << "Mais bem avaliado:;";
     for (int i = 0; i < projects.size(); i++)
     {
-        if(projects[i].getAssesments() == maiorAvaliacao)
+        if (projects[i].getAssesments() == maiorAvaliacao)
         {
-            if(cont == 0)
+            if (cont == 0)
             {
                 relatorio << projects[i].getTitle() << ";" << projects[i].getAssesments() << "\n";
-                cont+=1;
+                cont += 1;
             }
             else
             {
@@ -267,17 +316,17 @@ bool Controller::salvar()
 {
     // Create an output filestream object
     ofstream arq_projects("../data/projects.csv");
-    
+
     // Send the column name to the stream
-    arq_projects << "title; author; assessments; lab; resume; addresspdf" << "\n";
-    
+    arq_projects << "title; author; assessments; lab; resume; addresspdf"
+                 << "\n";
+
     // Send data to the stream
-    for(int i = 0; i < projects.size(); ++i)
+    for (int i = 0; i < projects.size(); ++i)
     {
-        arq_projects << projects[i].getTitle() << "; [" << projects[i].getAuthors() << "]; [" << projects[i].getAssesments() << "]; " << projects[i].getLab() << "; " << projects[i].getResume() << "; " << projects[i].getAdress();
-        
+        arq_projects << projects[i].getTitle() << ";" << projects[i].getAuthorsComplete() << ";" << projects[i].getAssessmentsComplete() << ";" << projects[i].getLab() << ";" << projects[i].getResume() << ";" << projects[i].getAdress();
     }
-    
+
     // Close the file
     arq_projects.close();
 }
@@ -289,20 +338,21 @@ bool Controller::carregar()
     ifstream arq_projects("../data/projects.csv");
 
     // Make sure the file is open
-    if(!arq_projects.is_open()) throw std::runtime_error("Arquivo projeto inativo!");
+    if (!arq_projects.is_open())
+        throw std::runtime_error("Arquivo projeto inativo!");
 
     // Helper vars
     string line;
 
     // Read the column names
-    if(arq_projects.good())
+    if (arq_projects.good())
     {
         // Extract the first line in the file
         getline(arq_projects, line);
     }
 
     // Read data, line by line
-    while(getline(arq_projects, line))
+    while (getline(arq_projects, line))
     {
         string intermediario;
         stringstream informacoes(line);
@@ -313,15 +363,18 @@ bool Controller::carregar()
 
         // Recebendo autores
         getline(informacoes, intermediario, ';');
-        
-        vector <Author> autors_vector;
+
+        vector<Author *> autors_vector;
         string autor;
         stringstream autores(intermediario);
 
-        while(getline(autores, autor, ','))
+        while (getline(autores, autor, ','))
         {
             stringstream atributos(autor);
-            
+
+            string role;
+            getline(atributos, role, '-');
+
             string nome;
             getline(atributos, nome, '-');
 
@@ -330,10 +383,28 @@ bool Controller::carregar()
 
             string instituicao;
             getline(atributos, instituicao, '-');
-            autors_vector.push_back(Author(nome, area, instituicao));
+
+            Author *novo_autor;
+            if (stoi(role) == 1)
+            {
+                autors_vector.push_back(new Student(nome, instituicao, area));
+            }
+            else if (stoi(role) == 2)
+            {
+                autors_vector.push_back(new Teacher(nome, instituicao, area));
+            }
         }
 
+        // Recebendo avaliações
+        getline(informacoes, intermediario, ';');
 
+        vector<Assessment> Assessment_vector;
+        string avaliacao;
+        stringstream avaliacaoes(intermediario);
+
+        while (getline(avaliacaoes, avaliacao, ','))
+        {
+        }
     }
 
     // Close file
@@ -348,6 +419,7 @@ void Controller::listarTodos()
     {
         cout << "Autor: " << projects[i].getAuthors() << endl;
         cout << "Titulo: " << projects[i].getTitle() << endl;
-        cout << "Laboratório de desenvolvimento: " << projects[i].getLab() << endl<< endl;
+        cout << "Laboratório de desenvolvimento: " << projects[i].getLab() << endl
+             << endl;
     }
 }

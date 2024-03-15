@@ -1,3 +1,4 @@
+#pragma once
 #include "Author.h"
 
 class Student : public Author{

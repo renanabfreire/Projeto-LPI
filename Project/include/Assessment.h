@@ -11,12 +11,13 @@ class Assessment
         Author *avaliador;
         int rating;
 
-    Assessment();
-    Assessment(Author avaliador, int rating);
+        Assessment();
+        Assessment(Author *avaliador, int rating);
 
-    // Funcoes para edição das avaliações
-    bool editAuhtor(Author avaliador);
-    bool editRating(int rating);
+        // Funcoes para edição das avaliações
+        bool editAuhtor(Author *avaliador);
+        bool editRating(int rating);
+        std::string getAuthor();
 };
 
 #endif // ASSESSMENT_H

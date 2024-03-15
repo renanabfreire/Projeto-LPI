@@ -1,10 +1,10 @@
-#include "Assessment.h"
+#include "../include/Assessment.h"
 
 Assessment::Assessment()
 {
 }
 
-Assessment::Assessment(Author avaliador, int rating){
+Assessment::Assessment(Author *avaliador, int rating){
 
     if (rating < 1 || rating > 5){
         throw std::invalid_argument("A avaliacao deve ser de 1 a 5");
@@ -15,7 +15,7 @@ Assessment::Assessment(Author avaliador, int rating){
 
 }
 
-bool Assessment::editAuhtor(Author avaliador)
+bool Assessment::editAuhtor(Author *avaliador)
 {
     try
     {
@@ -41,5 +41,15 @@ bool Assessment::editRating(int rating)
         std::cerr << "Erro: " << e.what() << std::endl;
         return false;
     }
+}
+
+std::string Assessment::getAuthor(){
+    std::string out = "";
+    out += avaliador->getName();
+    out += "-";
+    out += avaliador->getArea();
+    out += "-";
+    out += avaliador->getInstitution();
+    return out;
 }
 

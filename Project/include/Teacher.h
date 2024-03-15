@@ -1,3 +1,4 @@
+#pragma once
 #include "Author.h"
 #include <string>
 using namespace std;

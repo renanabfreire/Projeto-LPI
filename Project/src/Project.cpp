@@ -4,17 +4,19 @@ Project::Project()
 {
 }
 
-Project::Project(std::string title, std::vector <Author> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf)
+Project::~Project(){}
+
+Project::Project(std::string title, std::vector <Author*> author, std::vector <Assessment> assessments, std::string lab, std::string resume, std::string addresspdf)
 {
     this->title = title;
-    this->author = author;
     this->assessments = assessments;
     this->lab = lab;
     this->resume = resume;
     this->addresspdf = addresspdf;
+    this->author = author;
 }
 
-Project::Project(std::string title, std::vector <Author> author, std::string lab, std::string resume, std::string addresspdf)
+Project::Project(std::string title, std::vector <Author*> author, std::string lab, std::string resume, std::string addresspdf)
 {
     this->title = title;
     this->author = author;
@@ -38,7 +40,7 @@ bool Project::editTitle(std::string title)
     }
 }
 
-bool Project::addAuhtor(Author author)
+bool Project::addAuhtor(Author *author)
 {
     try
     {
@@ -122,7 +124,7 @@ std::string Project::getAuthors()
 
     for(int i=0; i<tam; i++)
     {
-        out += author[i].getName();
+        out += author[i]->getName();
         if(i<(tam-1))
         {
             out += ", ";
@@ -149,11 +151,12 @@ std::string Project::getAssessmentsComplete(){
 
     for(int i=0; i<assessments.size(); i++)
     {
-        out += assessments[i].();
+        out += assessments[i].getAuthor();
         out += "-";
-        out += author[i].getArea();
-        out += "-";
-        out += author[i].getInstitution();
+        out += to_string(assessments[i].rating);
+        if (i != assessments.size()-1){
+            out += ",";
+        }
     }
 
     return out;
@@ -182,12 +185,16 @@ std::string Project::getAuthorsComplete(){
 
     for(int i=0; i<author.size(); i++)
     {
-        out += author[i].getName();
+        out += author[i]->getRole();
         out += "-";
-        out += author[i].getArea();
+        out += author[i]->getName();
         out += "-";
-        out += author[i].getInstitution();
+        out += author[i]->getArea();
+        out += "-";
+        out += author[i]->getInstitution();
+        if (i != author.size()-1){
+            out += ",";
+        }
     }
-
     return out; 
 }

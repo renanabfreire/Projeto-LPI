@@ -12,6 +12,7 @@ class Author
 
     public:
         Author(std::string name, int role, std::string institution);
+        ~Author();
 
         //Funções para edição dos autores
         void setName(std::string name);

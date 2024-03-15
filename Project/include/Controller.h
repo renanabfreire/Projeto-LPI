@@ -4,13 +4,15 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <utility> // std::pair
-#include <stdexcept> // std::runtime_error
-#include <sstream> // std::stringstream
+#include <stdexcept>
+#include <sstream>
+#include <ctype.h>
 #include "Assessment.h"
 #include "Author.h"
 #include "Login.h"
 #include "Project.h"
+#include "Student.h"
+#include "Teacher.h"
 
 class Controller{
 
@@ -36,7 +38,7 @@ class Controller{
         void excluirProjeto(std::string title);
 
         // Editar um projeto
-        bool editarProjeto(int id_projeto);
+        bool editarProjeto(std::string title);
 
         // Gerar relatório
         bool gerarRelatorio();

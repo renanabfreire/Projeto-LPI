@@ -1,11 +1,12 @@
-#include "Author.h"
-#include <fstream>
+#include "../include/Author.h"
 
 Author::Author(std::string name, int role, std::string institution){
     this->name = name;
     this->role = role;
     this->institution = institution;
 }
+
+Author::~Author(){}
 
 void Author::setName(std::string name){
     this->name = name;
