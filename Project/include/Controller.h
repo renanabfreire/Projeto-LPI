@@ -9,7 +9,6 @@
 #include <ctype.h>
 #include "Assessment.h"
 #include "Author.h"
-#include "Login.h"
 #include "Project.h"
 #include "Student.h"
 #include "Teacher.h"
