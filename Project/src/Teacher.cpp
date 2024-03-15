@@ -13,3 +13,15 @@ string Teacher:: getArea(){
 }
 
 Teacher:: ~Teacher(){}
+
+std::string Teacher::getAuthor(){
+    std::string out = "";
+    out += std::to_string(role);
+    out += "-";
+    out += name;
+    out += "-";
+    out += departament;
+    out += "-";
+    out += institution;
+    return out;
+}

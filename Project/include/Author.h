@@ -23,6 +23,7 @@ class Author
         virtual std::string getArea() = 0;
         std::string getInstitution();
         int getRole();
+        virtual std::string getAuthor() = 0;
 };
 
 #endif // AUTHOR_H

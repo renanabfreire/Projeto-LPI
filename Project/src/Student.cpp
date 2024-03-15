@@ -14,3 +14,15 @@ std::string Student::getArea(){
 }
 
 Student:: ~Student(){}
+
+std::string Student::getAuthor(){
+    std::string out = "";
+    out += std::to_string(role);
+    out += "-";
+    out += name;
+    out += "-";
+    out += course;
+    out += "-";
+    out += institution;
+    return out;
+}

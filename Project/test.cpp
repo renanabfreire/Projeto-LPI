@@ -1,21 +1,18 @@
-#include "../include/Controller.h"
+#include "./include/Controller.h"
 #include <vector>
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    /* vector<Author *> author;
+    vector<Author*> author;
 
     author.push_back(new Student("Joao", "UFABC", "Engenharia"));
     author.push_back(new Teacher("Maria", "UFCAB", "Matematica"));
 
     for (int i = 0; i < author.size(); i++)
     {
-        cout << "Nome: " << author[i]->getName() << endl;
-        cout << "Nome: " << author[i]->getArea() << endl;
-        cout << "Nome: " << author[i]->getInstitution() << endl;
-        cout << "Nome: " << author[i]->getRole() << endl;
+        cout << author[i]->getAuthor() << endl;
     }
 
     Assessment aa = Assessment(author[0], 1);
@@ -29,12 +26,12 @@ int main()
     a.addAssessment(aa);
     a.addAssessment(bb);
 
-    cout << a.getAssessmentsComplete(); */
+    cout << a.getAssessmentsComplete();
 
-    Controller sistema = Controller();
+    /* Controller sistema = Controller();
 
     sistema.adicionarProjeto("que cachorro eh esse", "topdosbichos", "auaua", "googe.com");
     sistema.adicionarProjeto("que gatinho eh esse", "topdosbichos2", "miaumiau", "gatinho.com");
 
-    sistema.salvar();
+    sistema.salvar(); */
 }

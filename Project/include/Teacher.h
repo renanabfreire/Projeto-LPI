@@ -12,4 +12,5 @@ class Teacher: public Author{
         ~Teacher();
         void setArea(string area);
         string getArea();
+        std::string getAuthor();
 };

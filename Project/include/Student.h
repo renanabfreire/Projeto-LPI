@@ -11,4 +11,5 @@ class Student : public Author{
         ~Student();
         void setArea(std::string course);
         std::string getArea();
+        std::string getAuthor();
 };
