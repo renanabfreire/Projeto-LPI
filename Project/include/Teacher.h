@@ -3,16 +3,12 @@
 using namespace std;
 
 class Teacher: public Author{
-
-    protected:
-    string departament;
+    private:
+        string departament;
 
     public:
-    Teacher();
-    Teacher(string name, string instituition, string departament);
-    ~Teacher();
-    void setArea(string area);
-    string getArea();
-
-
+        Teacher(string name, string instituition, string departament);
+        ~Teacher();
+        void setArea(string area);
+        string getArea();
 };

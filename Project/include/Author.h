@@ -5,20 +5,23 @@
 // Class of Author
 class Author
 {
-    private:
+    protected:
+        int role;
         std::string name;
         std::string institution;
 
     public:
-        Author();
+        Author(std::string name, int role, std::string institution);
 
         //Funções para edição dos autores
-        bool setName(std::string name);
+        void setName(std::string name);
         virtual void setArea(std::string area) = 0;
-        bool setInstitution(std::string institution);
+        void setInstitution(std::string institution);
+        void setRole(int role);
         std::string getName();
-        virtual string getArea() = 0;
+        virtual std::string getArea() = 0;
         std::string getInstitution();
+        int getRole();
 };
 
 #endif // AUTHOR_H

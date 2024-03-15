@@ -1,16 +1,11 @@
 #include "Teacher.h"
 
-Teacher:: Teacher(){}
-
-Teacher:: Teacher(string name, string instituition, string departament){
-    setName(name);
-    setInstitution(instituition);
+Teacher:: Teacher(string name, string instituition, string departament):Author(name, 2, instituition){
     this->departament= departament;
-
 }
 
 void Teacher:: setArea(std::string area){
-    area= departament;
+    area = departament;
 }
 
 string Teacher:: getArea(){

@@ -2,15 +2,12 @@
 
 class Student : public Author{
 
-    protected:
-    string course;
+    private:
+        std::string course;
 
     public:
-    Student();
-    Student(string name, string instituition, string course);
-    ~Student();
-    void setArea(area);
-    string getArea();
-
-
+        Student(std::string name, std::string instituition, std::string course);
+        ~Student();
+        void setArea(std::string course);
+        std::string getArea();
 };

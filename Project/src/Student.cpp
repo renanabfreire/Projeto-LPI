@@ -1,20 +1,15 @@
 #include "Student.h"
 
-Student:: Student(){}
-
-Student:: Student(string name, string instituition, string course){
-
-    setName(name);
-    setInstitution(instituition);
+Student:: Student(std::string name, std::string instituition, std::string course):Author(name, 1, instituition){
     this-> course= course;
 
 }
 
 void Student:: setArea(std::string area){
-    area= course;
+    area = course;
 }
 
-string Student:: getArea(){
+std::string Student::getArea(){
     return course;
 }
 

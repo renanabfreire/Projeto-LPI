@@ -1,26 +1,19 @@
 #include "Author.h"
 #include <fstream>
 
-
-Author::Author()
-{
-    institution = "UFPB";
-}
-
 Author::Author(std::string name, int role, std::string institution){
     this->name = name;
     this->role = role;
     this->institution = institution;
 }
 
-bool Author::setName(std::string name){
+void Author::setName(std::string name){
     this->name = name;
-    return true;
 }
-bool Author::setRole(int role){
+void Author::setRole(int role){
     this->role = role;
 }
-bool Author::setInstitution(std::string institution){
+void Author::setInstitution(std::string institution){
     this->institution = institution;
 }
 std::string Author::getName(){
