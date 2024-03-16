@@ -18,7 +18,7 @@ int main()
     Assessment aa = Assessment(author[0], 1);
     Assessment bb = Assessment(author[1], 5);
 
-    //cout << b.getAuthor();
+    //cout << bb.getAuthor();
 
     Project a = Project("title", author, "lab", "resume", "addresspdf");
     cout << a.getAuthorsComplete() << endl;
@@ -26,7 +26,7 @@ int main()
     a.addAssessment(aa);
     a.addAssessment(bb);
 
-    cout << a.getAssessmentsComplete();
+    cout << "Asses: " << a.getAssessmentsComplete();
 
     /* Controller sistema = Controller();
 

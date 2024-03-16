@@ -46,11 +46,7 @@ bool Assessment::editRating(int rating)
 
 std::string Assessment::getAuthor(){
     std::string out = "";
-    out += avaliador->getName();
-    out += "-";
-    out += avaliador->getArea();
-    out += "-";
-    out += avaliador->getInstitution();
+    out += avaliador->getAuthor();
     return out;
 }
 

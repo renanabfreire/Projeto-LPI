@@ -185,15 +185,7 @@ std::string Project::getAuthorsComplete(){
 
     for(int i=0; i<author.size(); i++)
     {
-        int role = author[i]->getRole();
-        cout << role;
-        out += to_string(role);
-        out += "-";
-        out += author[i]->getName();
-        out += "-";
-        out += author[i]->getArea();
-        out += "-";
-        out += author[i]->getInstitution();
+        out += author[i]->getAuthor();
         if (i != author.size()-1){
             out += ",";
         }
