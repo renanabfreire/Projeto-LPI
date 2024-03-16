@@ -29,8 +29,6 @@ int main()
 
     Controller sistema = Controller();
 
-    sistema.carregar();
-
     sistema.listarTodos();
 
     /* sistema.adicionarProjeto("que cachorro eh esse", "topdosbichos", "auaua", "googe.com");

@@ -3,10 +3,12 @@ using namespace std;
 
 Controller::Controller()
 {
+    carregar();
 }
 
 Controller::~Controller()
 {
+    salvar();
 }
 
 int Controller::indiceProjeto(string title)
