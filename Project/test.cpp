@@ -1,11 +1,10 @@
 #include "./include/Controller.h"
-#include <vector>
-#include <iostream>
+
 using namespace std;
 
 int main()
 {
-    vector<Author*> author;
+    /* vector<Author*> author;
 
     author.push_back(new Student("Joao", "UFABC", "Engenharia"));
     author.push_back(new Teacher("Maria", "UFCAB", "Matematica"));
@@ -26,12 +25,17 @@ int main()
     a.addAssessment(aa);
     a.addAssessment(bb);
 
-    cout << "Asses: " << a.getAssessmentsComplete();
+    cout << "Asses: " << a.getAssessmentsComplete(); */
 
-    /* Controller sistema = Controller();
+    Controller sistema = Controller();
 
-    sistema.adicionarProjeto("que cachorro eh esse", "topdosbichos", "auaua", "googe.com");
-    sistema.adicionarProjeto("que gatinho eh esse", "topdosbichos2", "miaumiau", "gatinho.com");
+    sistema.carregar();
 
-    sistema.salvar(); */
+    sistema.listarTodos();
+
+    /* sistema.adicionarProjeto("que cachorro eh esse", "topdosbichos", "auaua", "googe.com");
+
+    sistema.editarProjeto("que cachorro eh esse"); */
+
+    //sistema.salvar();
 }

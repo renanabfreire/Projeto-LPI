@@ -59,7 +59,7 @@ void Controller::adicionarProjeto(
                 string course;
                 cout << "Digite o curso: ";
                 cin >> course;
-                cin.ignore();
+                //cin.ignore();
                 autores.push_back(new Student(name, institution, course));
             }
             else if (role == 2)
@@ -67,7 +67,7 @@ void Controller::adicionarProjeto(
                 string departament;
                 cout << "Digite o departamento: ";
                 cin >> departament;
-                cin.ignore();
+                //cin.ignore();
                 autores.push_back(new Teacher(name, institution, departament));
             }
 
@@ -152,11 +152,14 @@ bool Controller::editarProjeto(string title)
         int role, rating;
 
         cout << "Digite as informações do autor do comentário:" << endl;
+
         cout << "Nome: ";
         getline(cin, nome);
+
         cout << "Cargo: ";
         cin >> role;
         cin.ignore();
+        
         cout << "Instituição: ";
         getline(cin, instituicao);
 
@@ -165,12 +168,14 @@ bool Controller::editarProjeto(string title)
         if (role == 1)
         {
             string course;
+            cout << "Digite o curso: ";
             cin >> course;
             autor_comentario = new Student(nome, instituicao, course);
         }
         else if (role == 2)
         {
             string departament;
+            cout << "Digite o departamento: ";
             cin >> departament;
             autor_comentario = new Teacher(nome, instituicao, departament);
         }
@@ -320,7 +325,11 @@ bool Controller::gerarRelatorio()
 bool Controller::salvar()
 {
     // Create an output filestream object
-    ofstream arq_projects("../data/projects.csv", ios_base::out);
+    ofstream arq_projects("./data/projects.csv", ios_base::out);
+
+    // Make sure the file is open
+    if (!arq_projects.is_open())
+        throw std::runtime_error("Arquivo projeto inativo!");
 
     // Send the column name to the stream
     arq_projects << "title; author; assessments; lab; resume; addresspdf"
@@ -340,7 +349,7 @@ bool Controller::salvar()
 bool Controller::carregar()
 {
     // Create an input filestream
-    ifstream arq_projects("../data/projects.csv", ios_base::in);
+    ifstream arq_projects("./data/projects.csv", ios_base::in);
 
     // Make sure the file is open
     if (!arq_projects.is_open())
@@ -390,11 +399,20 @@ bool Controller::carregar()
             getline(atributos, instituicao, '-');
 
             Author *novo_autor;
-            if (stoi(role) == 1)
+
+            int role_n;
+
+            try {
+                role_n = stoi(role);
+            } catch (const std::invalid_argument& e) {
+                cerr << "Error: Invalid string format for conversion to integer." << endl;
+            }
+
+            if (role_n == 1)
             {
                 autors_vector.push_back(new Student(nome, instituicao, area));
             }
-            else if (stoi(role) == 2)
+            else if (role_n == 2)
             {
                 autors_vector.push_back(new Teacher(nome, instituicao, area));
             }
@@ -403,14 +421,72 @@ bool Controller::carregar()
         // Recebendo avaliações
         getline(informacoes, intermediario, ';');
 
-        vector<Assessment> Assessment_vector;
+        vector <Assessment> Assessment_vector;
         string avaliacao;
         stringstream avaliacaoes(intermediario);
 
         while (getline(avaliacaoes, avaliacao, ','))
         {
+            stringstream atributos(avaliacao);
+
+            string role;
+            getline(atributos, role, '-');
+
+            string nome;
+            getline(atributos, nome, '-');
+
+            string area;
+            getline(atributos, area, '-');
+
+            string instituicao;
+            getline(atributos, instituicao, '-');
+
+            string rating;
+            getline(atributos, rating, '-');
+
+            int role_n;
+
+            try {
+                role_n = stoi(role);
+            } catch (const std::invalid_argument& e) {
+                cerr << "Error: Invalid string format for conversion to integer." << endl;
+            }
+
+            Author *novo_autor;
+            if (role_n == 1)
+            {
+                novo_autor = new Student(nome, instituicao, area);
+            }
+            else if (role_n == 2)
+            {
+                novo_autor = new Teacher(nome, instituicao, area);
+            }
+
+            int rating_n;
+
+            try {
+                rating_n = stoi(rating);
+            } catch (const std::invalid_argument& e) {
+                cerr << "Error: Invalid string format for conversion to integer." << endl;
+            }
+
+            Assessment_vector.push_back(Assessment(novo_autor, rating_n));
         }
+
+        // Recebendo lab, resume e addresspdf
+        getline(informacoes, intermediario, ';');
+        string lab = intermediario;
+
+        getline(informacoes, intermediario, ';');
+        string resume = intermediario;
+
+        getline(informacoes, intermediario, ';');
+        string addresspdf = intermediario;
+
+        projects.push_back(Project(titulo, autors_vector, Assessment_vector, lab, resume, addresspdf));
     }
+
+    cout << "Arquivo projetos aberto com sucesso" << endl;
 
     // Close file
     arq_projects.close();
