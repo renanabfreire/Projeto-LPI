@@ -22,6 +22,10 @@ int Controller::indiceProjeto(string title)
             return i;
         };
     }
+    if(title == "__PEGAR_TAM__")
+    {
+        return tam;
+    }
     return -1;
 }
 
@@ -105,6 +109,7 @@ void Controller::pesquisarProjeto(std::string title)
             cout << "Resumo: \n"
                  << projects[i].getResume() << endl;
         }
+        
     }
 }
 
@@ -115,12 +120,12 @@ void Controller::excluirProjeto(string title)
 
     if (indiceProjeto(title) == -1)
     {
-        cout << "Esse projeto não existe";
+        cout << "  ? Esse projeto não existe ?";
     }
     else
     {
         this->projects.erase(projects.begin() + i);
-        cout << title << " excluido com sucesso!" << endl;
+        cout << title << "  + excluido com sucesso! +" << endl;
     }
 }
 
@@ -171,14 +176,14 @@ bool Controller::editarProjeto(string title)
         {
             string course;
             cout << "Digite o curso: ";
-            cin >> course;
+            getline(cin, course);
             autor_comentario = new Student(nome, instituicao, course);
         }
         else if (role == 2)
         {
             string departament;
             cout << "Digite o departamento: ";
-            cin >> departament;
+            getline(cin, departament);
             autor_comentario = new Teacher(nome, instituicao, departament);
         }
 
@@ -276,7 +281,7 @@ bool Controller::gerarRelatorio()
     // Gerando arquivo
     fstream relatorio;
 
-    relatorio.open("../data/Relatório.csv", ios::out);
+    relatorio.open("./data/Relatório.csv", ios::out);
     if (!relatorio.is_open())
     {
         cout << "Erro: Não foi possível abrir arquivo :/" << endl;
