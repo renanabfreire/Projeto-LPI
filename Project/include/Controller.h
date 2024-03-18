@@ -43,10 +43,10 @@ class Controller{
         bool gerarRelatorio();
 
         // Salvar no arquivo
-        bool salvar();
+        void salvar();
 
         // Upload do arquivo
-        bool carregar();
+        void carregar();
 
         // Listar todos
         void listarTodos();

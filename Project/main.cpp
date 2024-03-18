@@ -6,8 +6,6 @@ using namespace std;
 
 int interface();
 
-void carregamento();
-
 void mensagemDeClose();
 
 int main(){
@@ -25,9 +23,8 @@ int main(){
 
         if(opc == 1)
         {
-            cout << "\n\nGerando seu relatório";
+            cout << "\n\nGerando seu relatório...";
             condicao = crud.gerarRelatorio();
-            carregamento();
             if(condicao == false)
             {
                 cout << "Não conseguimos gerar o relatório :/\n";
@@ -35,13 +32,12 @@ int main(){
                 break;
             }else
             {
-                cout << "  + Relatório gerado com sucesso! +";
+                cout << "\n  + Relatório gerado com sucesso! +";
                 getchar();
             }
         }
         else if(opc == 2)
         {
-            cin.ignore();
             string titulo, lab, resume, addresspdf;
             cout << "\n\n  = Título: ";
             getline(cin, titulo);
@@ -59,8 +55,7 @@ int main(){
         else if(opc == 3)
         {
             string title;
-            cin.ignore();
-
+            
             do{
                 cout << "Digite o titulo do projeto no qual você deseja editar\n    -> ";
                 getline(cin, title);
@@ -80,14 +75,13 @@ int main(){
 
         else if(opc == 4)
         {
-            cin.ignore();
             string title;
             do{
                 cout << "Digite o titulo do projeto no qual você deseja pesquisar\n    -> ";
                 getline(cin, title);
                 if(crud.indiceProjeto(title) == -1)
                 {
-                    cout << "        - Projeto não encotrado :/ -\n        -      Tente novamente     -";
+                    cout << "        - Projeto não encotrado :/ -\n        -      Tente novamente     -\n";
                 }
                 else{
                     crud.pesquisarProjeto(title);
@@ -96,9 +90,14 @@ int main(){
             } while(crud.indiceProjeto(title) == -1);        
         }
         else if(opc == 5)
+        {
+            cout << "Listando todos os projetos...\n";
+            crud.listarTodos();
+
+            getchar();
+        }
+        else if(opc == 6)
         { 
-            cin.ignore();
-            
             string title;
             cout << "Digite o titulo do projeto no qual você deseja excluir\n    -> ";
             getline(cin, title);
@@ -108,8 +107,7 @@ int main(){
         }
         else
         {
-            cout << "    []  Fechando programa  []" << endl;
-            carregamento();
+            cout << "    []  Fechando programa  []\n";
             break;
         }
     }  
@@ -119,31 +117,33 @@ int main(){
 
 int interface()
 {
+    string opcao;
     int o=0;
-    while(o<1 || o>6)
+    while(o<1 || o>7)
     {
         cout << "\n\n   + O que deseja fazer?" << endl;
-        cout << "     [ 1 ] Gerar Relatório,\n     [ 2 ] Adicionar Projeto\n     [ 3 ] Avaliar/Editar Projeto\n     [ 4 ] Pesquisar Projeto\n     [ 5 ] !! Excluir Projeto !!\n     [ 6 ] Fechar programa" << endl;
+        cout << "     [ 1 ] Gerar Relatório,\n     [ 2 ] Adicionar Projeto\n     [ 3 ] Avaliar/Editar Projeto\n     [ 4 ] Pesquisar Projeto\n     [ 5 ] Listar Todos os Projetos\n     [ 6 ] !! Excluir Projeto !!\n     [ 7 ] Fechar programa" << endl;
         cout << "Digite a sua opção: ";
-        cin >> o;
+        cin >> opcao;
 
-        if(o<1 || o>6)
+        if(o<1 || o>7)
         {
             cout << "Operação não identificada, por favor, repita sua escolha..." << endl;
         }
+
+        try
+        {
+            o = stoi(opcao);    
+        }
+        catch(const std::exception& e)
+        {
+            cout << "Digite um número" << '\n';
+        }
+        
+        cin.ignore();
     }
 
     return o;
-}
-
-void carregamento()
-{
-    sleep(0.5);
-    cout << ".";
-    sleep(0.5);
-    cout << ".";
-    sleep(0.5);
-    cout << ".";
 }
 
 void mensagemDeClose()

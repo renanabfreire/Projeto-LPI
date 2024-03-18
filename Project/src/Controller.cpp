@@ -132,13 +132,24 @@ void Controller::excluirProjeto(string title)
 // Editar um projeto
 bool Controller::editarProjeto(string title)
 {
+    string opcao;
     int o = 0;
 
     try
     {
         cout << "[ 1 ] Avaliar\n[ 2 ] Editar Título\n[ 3 ] Adicionar Autor\n[ 4 ] Editar Resumo\n[ 5 ] Mudar Link do PDF\n\nO que deseja fazer ? ";
-        cin >> o;
+        cin >> opcao;
         cin.ignore();
+
+        try
+        {
+            o = stoi(opcao);
+        }
+        catch(const std::exception& e)
+        {
+            cout << "Tente um valor numérico" << '\n';
+        }
+        
     }
     catch (const exception &e)
     {
@@ -229,13 +240,15 @@ bool Controller::editarProjeto(string title)
         if (role == 1)
         {
             string course;
-            cin >> course;
+            cout << "Curso: ";
+            getline(cin, course);
             novo_autor = new Student(nome, instituicao, course);
         }
         else if (role == 2)
         {
             string departament;
-            cin >> departament;
+            cout << "Departamento: ";
+            getline(cin, departament);
             novo_autor = new Teacher(nome, instituicao, departament);
         }
 
@@ -307,7 +320,7 @@ bool Controller::gerarRelatorio()
     mediaDasAvaliacoes /= projects.size();
 
     // fim do relatório:
-    relatorio << "Avaliação média:;" << mediaDasAvaliacoes;
+    relatorio << "Avaliação média:;" << mediaDasAvaliacoes << "\n";
     relatorio << "Mais bem avaliado:;";
     for (int i = 0; i < projects.size(); i++)
     {
@@ -329,7 +342,7 @@ bool Controller::gerarRelatorio()
 }
 
 // Salvar no arquivo
-bool Controller::salvar()
+void Controller::salvar()
 {
     // Create an output filestream object
     ofstream arq_projects("./data/projects.csv", ios_base::out);
@@ -353,7 +366,7 @@ bool Controller::salvar()
 }
 
 // Upload do arquivo
-bool Controller::carregar()
+void Controller::carregar()
 {
     // Create an input filestream
     ifstream arq_projects("./data/projects.csv", ios_base::in);
@@ -492,8 +505,6 @@ bool Controller::carregar()
 
         projects.push_back(Project(titulo, autors_vector, Assessment_vector, lab, resume, addresspdf));
     }
-
-    cout << "Arquivo projetos aberto com sucesso" << endl;
 
     // Close file
     arq_projects.close();
