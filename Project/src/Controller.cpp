@@ -64,7 +64,7 @@ void Controller::adicionarProjeto(
             {
                 string course;
                 cout << "Digite o curso: ";
-                cin >> course;
+                getline(cin, course);
                 //cin.ignore();
                 autores.push_back(new Student(name, institution, course));
             }
@@ -72,7 +72,7 @@ void Controller::adicionarProjeto(
             {
                 string departament;
                 cout << "Digite o departamento: ";
-                cin >> departament;
+                getline(cin, departament);
                 //cin.ignore();
                 autores.push_back(new Teacher(name, institution, departament));
             }
