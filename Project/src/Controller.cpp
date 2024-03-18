@@ -166,7 +166,7 @@ bool Controller::editarProjeto(string title)
     }
     else if (o == 1)
     {
-        string nome, instituicao, comentario;
+        string nome, instituicao, comentario, r;
         int role, rating;
 
         cout << "Digite as informações do autor do comentário:" << endl;
@@ -199,11 +199,24 @@ bool Controller::editarProjeto(string title)
         }
 
         cout << "\nAdicione valor da avaliação [ de 1 a 5 ]: ";
-        cin >> rating;
+        
         while (rating < 1 || rating > 5)
         {
-            cout << "Avaliação inválida, digite um valor válido." << endl;
-            cin >> rating;
+            cin >> r;
+
+            try
+            {
+                rating = stoi(r);
+            }
+            catch(const std::exception& e)
+            {
+                cout << "Digite um valor numérico" << '\n';
+            }
+            
+            if(rating < 1 || rating > 5)
+            {
+                cout << "Digite um valor válido";
+            }
         }
 
         Assessment avaliacao = Assessment(autor_comentario, rating);

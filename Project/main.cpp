@@ -66,6 +66,7 @@ int main(){
                 else
                 {
                     crud.editarProjeto(title);
+                    break;
                 }
             } while(crud.indiceProjeto(title) == -1);
 
@@ -126,11 +127,6 @@ int interface()
         cout << "Digite a sua opção: ";
         cin >> opcao;
 
-        if(o<1 || o>7)
-        {
-            cout << "Operação não identificada, por favor, repita sua escolha..." << endl;
-        }
-
         try
         {
             o = stoi(opcao);    
@@ -139,6 +135,12 @@ int interface()
         {
             cout << "Digite um número" << '\n';
         }
+
+        if(o<1 || o>7)
+        {
+            cout << "Operação não identificada, por favor, repita sua escolha..." << endl;
+        }
+
         
         cin.ignore();
     }
