@@ -15,4 +15,22 @@ Este software é um gerenciador de artigos e projetos acadêmicos desenvolvido e
 ## Como Compilar e Executar
 
 1. Clone o repositório do software para o seu computador.
-2. Abra um terminal e navegue até o diretório do projeto.
+
+2. Abra um terminal e navegue até o diretório do `Project`.
+
+   ```
+   g++ -c ./src/*.cpp
+   g++ *.o test.cpp  
+   ./a.exe
+   ```
+
+
+## Diagrama de Classes
+
+<img src="./Project/data/diagrama-uml.png" style="zoom:50%;" />
+
+## Colaboradores do Projeto
+
+- Alysson Martim da S. Barbosa
+- Fernanda Azevedo D. Silva
+- Renan Abreu B. Freire
