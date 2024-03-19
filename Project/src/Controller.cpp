@@ -102,7 +102,7 @@ void Controller::pesquisarProjeto(std::string title)
         if (projects[i].getTitle().find(title) != string::npos)
         {
 
-            cout << "Autor: " << projects[i].getAuthors() << endl;
+            cout << "\nAutor: " << projects[i].getAuthors() << endl;
             cout << "Titulo: " << projects[i].getTitle() << endl;
             cout << "Média das avaliações: " << projects[i].getAssesments() << endl;
             cout << "Laboratório de desenvolvimento: " << projects[i].getLab() << endl;

@@ -13,9 +13,11 @@ int main(){
     int opc=0;
     bool condicao;
 
-    cout << " -----------------------------------------------------------------" << endl;
-    cout << "|==================== BEM VINDO AO DIVULGA-CI ====================|" << endl;
-    cout << " -----------------------------------------------------------------" << endl;
+    cout << "\t\t -----------------------------------------------------------------" << endl;
+    cout << "\t\t|                                                                 |" << endl;
+    cout << "\t\t|==================== BEM VINDO AO DIVULGA-CI ====================|" << endl;
+    cout << "\t\t|                                                                 |" << endl;
+    cout << "\t\t -----------------------------------------------------------------" << endl;
 
     while(1)
     {
@@ -32,9 +34,10 @@ int main(){
                 break;
             }else
             {
-                cout << "\n  + Relatório gerado com sucesso! +";
+                cout << "\n\t\t\t\t+ Relatório gerado com sucesso! +";
                 getchar();
             }
+            system("clear");
         }
         else if(opc == 2)
         {
@@ -49,8 +52,9 @@ int main(){
             getline(cin, addresspdf);
             crud.adicionarProjeto(titulo, lab, resume, addresspdf);
 
-            cout << "  + Projeto cadastrado +";
+            cout << "\t\t\t\t+ Projeto cadastrado +";
             getchar();
+            system("clear");
         }
         else if(opc == 3)
         {
@@ -70,45 +74,50 @@ int main(){
                 }
             } while(crud.indiceProjeto(title) == -1);
 
-            cout << "  + Operação concluída +";
+            cout << "\t\t\t\t+ Operação concluída +";
             getchar();
+            system("clear");
         }
 
         else if(opc == 4)
         {
             string title;
             do{
-                cout << "Digite o titulo do projeto no qual você deseja pesquisar\n    -> ";
+                cout << "\nDigite o titulo do projeto no qual você deseja pesquisar\n    -> ";
                 getline(cin, title);
                 if(crud.indiceProjeto(title) == -1)
                 {
-                    cout << "        - Projeto não encotrado :/ -\n        -      Tente novamente     -\n";
+                    cout << "\t\t\t\t- Projeto não encotrado :/ -\n\t\t\t\t-      Tente novamente     -\n";
                 }
                 else{
                     crud.pesquisarProjeto(title);
                 }
 
-            } while(crud.indiceProjeto(title) == -1);        
+            } while(crud.indiceProjeto(title) == -1);  
+            getchar();
+            system("clear");      
         }
         else if(opc == 5)
         {
-            cout << "Listando todos os projetos...\n";
+            cout << "\n\t\tListando todos os projetos...\n\n";
             crud.listarTodos();
 
             getchar();
+            system("clear");
         }
         else if(opc == 6)
         { 
             string title;
-            cout << "Digite o titulo do projeto no qual você deseja excluir\n    -> ";
+            cout << "\nDigite o titulo do projeto no qual você deseja excluir\n    -> ";
             getline(cin, title);
 
             crud.excluirProjeto(title);
             getchar();
+            system("clear");
         }
         else
         {
-            cout << "    []  Fechando programa  []\n";
+            cout << "\n\t\t\t\t  []  Fechando programa  []\n\n";
             break;
         }
     }  
@@ -122,9 +131,9 @@ int interface()
     int o=0;
     while(o<1 || o>7)
     {
-        cout << "\n\n   + O que deseja fazer?" << endl;
-        cout << "     [ 1 ] Gerar Relatório,\n     [ 2 ] Adicionar Projeto\n     [ 3 ] Avaliar/Editar Projeto\n     [ 4 ] Pesquisar Projeto\n     [ 5 ] Listar Todos os Projetos\n     [ 6 ] !! Excluir Projeto !!\n     [ 7 ] Fechar programa" << endl;
-        cout << "Digite a sua opção: ";
+        cout << "\n\n\t\t+ O que deseja fazer?" << endl;
+        cout << "\n\t\t\t[ 1 ] Gerar Relatório,\n\t\t\t[ 2 ] Adicionar Projeto\n\t\t\t[ 3 ] Avaliar/Editar Projeto\n\t\t\t[ 4 ] Pesquisar Projeto\n\t\t\t[ 5 ] Listar Todos os Projetos\n\t\t\t[ 6 ] !! Excluir Projeto !!\n\t\t\t[ 7 ] Fechar programa" << endl;
+        cout << "\n\t\t> Digite a sua opção: ";
         cin >> opcao;
 
         try
