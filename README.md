@@ -28,3 +28,9 @@ Este software é um gerenciador de artigos e projetos acadêmicos desenvolvido e
 ## Diagrama de Classes
 
 <img src="./Project/data/diagrama-uml.png" style="zoom:50%;" />
+
+## Colaboradores do Projeto
+
+- Alysson Martim da S. Barbosa
+- Fernanda Azevedo D. Silva
+- Renan Abreu B. Freire
