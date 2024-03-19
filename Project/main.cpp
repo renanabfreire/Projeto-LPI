@@ -13,6 +13,7 @@ int main(){
     int opc=0;
     bool condicao;
 
+    system("clear");
     cout << "\t\t -----------------------------------------------------------------" << endl;
     cout << "\t\t|                                                                 |" << endl;
     cout << "\t\t|==================== BEM VINDO AO DIVULGA-CI ====================|" << endl;
